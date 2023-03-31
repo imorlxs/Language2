@@ -1,17 +1,18 @@
 /*
- * Metodolog√≠a de la Programaci√≥n: Language2
+ * MetodologÌ≠a de la ProgramaciÛn: Language2
  * Curso 2022/2023
  */
 
 /* 
- * File:   main.cpp
- * @author Silvia Acid Carrillo <acid@decsai.ugr.es>
- * @author Andr√©s Cano Utrera <acu@decsai.ugr.es>
- * @author Luis Castillo Vidal <L.Castillo@decsai.ugr.es>
+ * @file   main.cpp
+ * @author Isaac Morales Santana <imorsan@correo.ugr.es>
+ * @author Francisco Javier Caceres Martin <javicaceres@correo.ugr.es>
  *
- * Created on 7 de febrero de 2023, 14:02
  */
 
+#include <iostream>
+#include <fstream>
+using namespace std;
 
 /**
  * Shows help about the use of this program in the given output stream
