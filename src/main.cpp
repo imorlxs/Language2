@@ -11,8 +11,9 @@
  *
  * Created on 7 de febrero de 2023, 14:02
  */
-
-
+#include <iostream>
+#include <fstream>
+using namespace std;
 /**
  * Shows help about the use of this program in the given output stream
  * @param outputStream The output stream where the help will be shown (for example,
