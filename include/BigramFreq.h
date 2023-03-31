@@ -1,5 +1,5 @@
 /*
- * Metodología de la Programación: Language2
+ * Metodología de la Programación: Language1
  * Curso 2022/2023
  */
 
@@ -44,14 +44,14 @@ public:
      * Query method
      * @return The frequency of this BigramFreq object
      */
-    int getFrequency();
+    int getFrequency() const;
 
     /**
      * @brief Sets the Bigram of this BigramFreq object
      * Modifier method
      * @param bigram The new Bigram value for this object. Input parameter
      */
-    void setBigram(Bigram bigram);
+    void setBigram(Bigram &bigram);
 
     /**
      * @brief Sets the frequency of this BigramFreq object. Modifier method.
@@ -68,6 +68,7 @@ public:
      * in this object. 
      */
     std::string toString();
+    void toUpper();
 
 private:
     Bigram _bigram; ///< the Bigram object
