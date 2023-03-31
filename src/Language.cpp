@@ -1,15 +1,13 @@
 /*
- * Metodolog√≠a de la Programaci√≥n: Language2
+ * MetodologÌ≠a de la ProgramaciÛn: Language2
  * Curso 2022/2023
  */
 
-/** 
- * @file Language.cpp
- * @author Silvia Acid Carrillo <acid@decsai.ugr.es>
- * @author Andr√©s Cano Utrera <acu@decsai.ugr.es>
- * @author Luis Castillo Vidal <L.Castillo@decsai.ugr.es>
- * 
- * Created on 29 January 2023, 11:00
+/* 
+ * @file   Language.cpp
+ * @author Isaac Morales Santana <imorsan@correo.ugr.es>
+ * @author Francisco Javier Caceres Martin <javicaceres@correo.ugr.es>
+ *
  */
 
 #include "Language.h"

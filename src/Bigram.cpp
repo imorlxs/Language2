@@ -1,11 +1,10 @@
-
 /*
- * MetodologÃ­a de la ProgramaciÃ³n: Language1
+ * Metodologí­a de la Programación: Language2
  * Curso 2022/2023
  */
 
 /* 
- * File:   Bigram.cpp
+ * @file   Bigram.cpp
  * @author Isaac Morales Santana <imorsan@correo.ugr.es>
  * @author Francisco Javier Caceres Martin <javicaceres@correo.ugr.es>
  *
