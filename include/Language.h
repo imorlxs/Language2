@@ -17,6 +17,7 @@
 
 
 #include <iostream>
+#include <fstream>
 #include "BigramFreq.h"
 
 /**
@@ -51,7 +52,7 @@ public:
      * Query method.
      * @return A const reference to the identifier of this language object.
      */
-    std::string getLanguageId();
+    std::string getLanguageId() const;
 
     /**
      * @brief Sets a new identifier for this language object. 
@@ -70,7 +71,7 @@ public:
      * given index is not valid
      * @return A const reference to the BigramFreq at the given position
      */
-    BigramFreq at(int index) const; 
+    BigramFreq at(int index) const;
 
     /**
      * @brief Gets a reference to the BigramFreq at the given position of the 
@@ -81,15 +82,15 @@ public:
      * given index is not valid
      * @return A reference to the BigramFreq at the given position
      */
-    BigramFreq at(int index); 
+    BigramFreq at(int index);
 
     /**
      * @brief Gets the number of BigramFreq objects. 
      * Query method
      * @return The number of BigramFreq objects
      */
-    int getSize();
-    
+    int getSize() const;
+
     /**
      * @brief Searchs the given bigram in the list of bigrams in this
      * Language. If found, it returns the position where it was found. If not,
@@ -103,7 +104,7 @@ public:
      * @return If found, it returns the position where the bigram 
      * was found. If not, it returns -1
      */
-    int findBigram(Bigram bigram);
+    int findBigram(Bigram &bigram);
 
     /**
      * @brief Obtains a string with the following content:
@@ -152,7 +153,7 @@ public:
      * an invalid magic string is found in the given file
      */
     void load(char fileName[]);
-    
+
     /**
      * @brief Appends a copy of the given BigramFreq to this Language object.
      * If the bigram is found in this object, then its frequency is increased
@@ -168,7 +169,7 @@ public:
      * @param bigramFreq The BigramFreq to append to this object. Input parameter
      */
     void append(BigramFreq bigramFreq);
-    
+
     /**
      * @brief Appends to this Language object, the list of pairs  
      * bigram-frequency objects contained in the Language @p language. This
@@ -178,7 +179,13 @@ public:
      * @param language A Language object. Input parameter
      */
     void join(Language language);
-    
+
+    /**
+     * @brief Swap two elements of the vector of BigramFreq
+     * @param Positions of the two elements
+     */
+    void swap(int first, int second);
+
 private:
     static const int DIM_VECTOR_BIGRAM_FREQ = 2000; ///< The capacity of the array _vectorBigramFreq
     std::string _languageId; ///< language identifier
