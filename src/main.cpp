@@ -12,7 +12,6 @@
 
 #include <iostream>
 #include <fstream>
-
 #include "Language.h"
 using namespace std;
 
