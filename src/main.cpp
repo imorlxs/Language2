@@ -12,6 +12,8 @@
 
 #include <iostream>
 #include <fstream>
+
+#include "Language.h"
 using namespace std;
 
 /**
@@ -39,6 +41,6 @@ void showEnglishHelp(ostream& outputStream) {
  * > language2 <file1.bgr> [<file2.bgr> ... <filen.bgr>] <outputFile.bgr> 
  */
 int main(int argc, char* argv[]) {
-
+    
 }
 
