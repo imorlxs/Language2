@@ -77,6 +77,7 @@ string Language::toString() {
         size += _vectorBigramFreq[i].toString();
         size += '\n';
     }
+    size.pop_back();
     return size;
 }
 
@@ -86,12 +87,8 @@ void Language::sort() {
             if (_vectorBigramFreq[j].getFrequency() > _vectorBigramFreq[j - 1].getFrequency()) {
                 this->swap(j, j - 1);
             } else if (_vectorBigramFreq[j].getFrequency() == _vectorBigramFreq[j - 1].getFrequency()) {
-                if (_vectorBigramFreq[j].getBigram().at(0) > _vectorBigramFreq[j - 1].getBigram().at(0)) {
+                if (_vectorBigramFreq[j].getBigram().getText() < _vectorBigramFreq[j - 1].getBigram().getText()) {
                     this->swap(j, j - 1);
-                } else if (_vectorBigramFreq[j].getBigram().at(0) == _vectorBigramFreq[j - 1].getBigram().at(0)) {
-                    if (_vectorBigramFreq[j].getBigram().at(1) > _vectorBigramFreq[j - 1].getBigram().at(1)) {
-                        this->swap(j, j - 1);
-                    }
                 }
             }
         }
@@ -110,7 +107,7 @@ void Language::save(char fileName[]) {
         }
         fout.close();
     } else {
-        throw std::ios_base::failure(string("error_de_apertura_del_fichero\n"));
+        throw std::ios_base::failure(string("error_de_apertura_del_fichero_save\n"));
     }
 }
 
@@ -142,7 +139,7 @@ void Language::load(char fileName[]) {
         }
         fin.close();
     } else {
-        throw std::ios_base::failure(string("error_de_apertura_del_fichero\n"));
+        throw std::ios_base::failure(string("error_de_apertura_del_fichero_load\n"));
     }
 }
 
@@ -157,15 +154,14 @@ void Language::append(BigramFreq bigramFreq) {
             _size++;
             _vectorBigramFreq[_size - 1].setBigram(bigram);
             _vectorBigramFreq[_size - 1].setFrequency(freq);
-        } else{
+        } else {
             throw std::out_of_range(string("The array is full\n"));
         }
     }
 }
 
-void Language::join(Language language){
-    int size = language.getSize();
-    for (int i = 0; i < language.getSize(); i++){
+void Language::join(Language language) {
+    for (int i = 0; i < language.getSize(); i++) {
         this->append(language.at(i));
     }
 }
