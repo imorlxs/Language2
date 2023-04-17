@@ -40,6 +40,23 @@ void showEnglishHelp(ostream& outputStream) {
  * > language2 <file1.bgr> [<file2.bgr> ... <filen.bgr>] <outputFile.bgr> 
  */
 int main(int argc, char* argv[]) {
-    
-}
 
+    Language input;
+    Language output;
+
+    if (argc <= 2) {
+        showEnglishHelp(cout);
+        exit(1);
+    }
+
+    output.load(argv[1]);
+    for (int i = 2; i < argc - 1; i++) {
+        input.load(argv[i]);
+        if (input.getLanguageId() == output.getLanguageId())
+            output.join(input);
+    }
+
+    output.sort();
+    output.save(argv[argc - 1]);
+    return 0;
+}
