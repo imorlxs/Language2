@@ -64,15 +64,7 @@ function doTest  {
             VALGRIND_LEAKS=FALSE
         fi
         # Tentative writing of the due output to check ISO/UTF format
-        echo "$DUE_OUTPUT" > $TESTS_FOLDER/.due$k
-        if   file $TESTS_FOLDER/.due$k | grep -a --quiet ISO;
-        then
-            toUTF8 $TESTS_FOLDER/.due$k
-            cp $TESTS_FOLDER/.due$k.utf8 $TESTS_FOLDER/.due$k
-            toUTF8 $TESTS_FOLDER/.out$k
-            cp $TESTS_FOLDER/.out$k.utf8 $TESTS_FOLDER/.out$k
-            DUE_OUTPUT=$(cat $TESTS_FOLDER/.due$k)
-        fi 
+        
         # If the real output of the program cotains %%%OUTPUT marks, then only those marks
         # are compared for validity. Otherwise, the full output is compared
         if  grep -a --quiet $OUTPUT_MARK $TESTS_FOLDER/.out$k; 

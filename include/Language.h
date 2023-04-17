@@ -59,7 +59,7 @@ public:
      * Modifier method.
      * @param id The new identifier. Input parameter 
      */
-    void setLanguageId(std::string id);
+    void setLanguageId(std::string &id);
 
 
     /**
@@ -71,7 +71,7 @@ public:
      * given index is not valid
      * @return A const reference to the BigramFreq at the given position
      */
-    BigramFreq at(int index) const;
+    const BigramFreq& at(int index) const;
 
     /**
      * @brief Gets a reference to the BigramFreq at the given position of the 
@@ -82,7 +82,7 @@ public:
      * given index is not valid
      * @return A reference to the BigramFreq at the given position
      */
-    BigramFreq at(int index);
+    BigramFreq& at(int index);
 
     /**
      * @brief Gets the number of BigramFreq objects. 
@@ -160,7 +160,7 @@ public:
      * with the one of the given BigramFreq object. If not, a copy of the 
      * given BigramFreq object is appended to the end of the list of
      * BigramFreq objects in this Language.
-     * @thow std::out_of_range Throws a std::out_of_range exception in case
+     * @throw std::out_of_range Throws a std::out_of_range exception in case
      * that a new element must be appended to the end of the array and the
      * number of elements in the array of BigramFreq is equals to the capacity
      * of that array. In that case, the array is full, and no more elements
@@ -168,7 +168,7 @@ public:
      * Modifier method
      * @param bigramFreq The BigramFreq to append to this object. Input parameter
      */
-    void append(BigramFreq bigramFreq);
+    void append(BigramFreq &bigramFreq);
 
     /**
      * @brief Appends to this Language object, the list of pairs  
@@ -178,11 +178,13 @@ public:
      * Modifier method
      * @param language A Language object. Input parameter
      */
-    void join(Language language);
+    void join(Language &language);
 
     /**
      * @brief Swap two elements of the vector of BigramFreq
      * @param Positions of the two elements
+     * @throw std::out_of_range Throws a std::out_of_range exception in case that 
+     * the positions given were incorrect.
      */
     void swap(int first, int second);
 

@@ -18,7 +18,7 @@
  BigramFreq::BigramFreq(){
      _frequency = 0;
 }
- Bigram BigramFreq::getBigram(){
+ Bigram BigramFreq::getBigram() const{
     return _bigram;
 }
 
