@@ -22,7 +22,7 @@ Language::Language() {
 }
 
 Language::Language(int numberBigrams) {
-    if (numberBigrams >= 0 && numberBigrams < DIM_VECTOR_BIGRAM_FREQ) {
+    if (numberBigrams >= 0 && numberBigrams <= DIM_VECTOR_BIGRAM_FREQ) {
         _size = numberBigrams;
         _languageId = "unknown";
     } else {
@@ -35,20 +35,20 @@ string Language::getLanguageId() const {
     return _languageId;
 }
 
-void Language::setLanguageId(string id) {
+void Language::setLanguageId(string &id) {
     _languageId = id;
 }
 
-BigramFreq Language::at(int index) const {
+const BigramFreq& Language::at(int index) const {
     if (index < _size && index >= 0) {
         return _vectorBigramFreq[index];
     } else {
-        throw std::out_of_range(std::string("Language::at(int index) const ")
+        throw std::out_of_range(std::string("Language::at(int index) ")
                 + "invalid position " + std::to_string(index));
     }
 }
 
-BigramFreq Language::at(int index) {
+BigramFreq& Language::at(int index) {
     if (index < _size && index >= 0) {
         return _vectorBigramFreq[index];
     } else {
@@ -77,7 +77,6 @@ string Language::toString() {
         size += _vectorBigramFreq[i].toString();
         size += '\n';
     }
-    size.pop_back();
     return size;
 }
 
@@ -122,6 +121,11 @@ void Language::load(char fileName[]) {
         if (magic_string == MAGIC_STRING_T) {
             fin >> _languageId;
             fin >> _size;
+
+            if (_size > DIM_VECTOR_BIGRAM_FREQ) {
+                throw std::out_of_range(string("Exceeded maximum capacity\n"));
+            }
+
             for (int i = 0; i < _size; i++) {
                 fin >> text;
                 fin >> frequency;
@@ -143,7 +147,7 @@ void Language::load(char fileName[]) {
     }
 }
 
-void Language::append(BigramFreq bigramFreq) {
+void Language::append(BigramFreq &bigramFreq) {
     Bigram bigram = bigramFreq.getBigram();
     int index = this->findBigram(bigram);
     int freq = bigramFreq.getFrequency();
@@ -160,15 +164,25 @@ void Language::append(BigramFreq bigramFreq) {
     }
 }
 
-void Language::join(Language language) {
+void Language::join(Language &language) {
     for (int i = 0; i < language.getSize(); i++) {
         this->append(language.at(i));
     }
 }
 
 void Language::swap(int first, int second) {
-    BigramFreq aux;
-    aux = _vectorBigramFreq[second];
-    _vectorBigramFreq[second] = _vectorBigramFreq[first];
-    _vectorBigramFreq[first] = aux;
+    if (first < 0 || first >= _size) {
+        throw std::out_of_range(std::string("Language::swap(int first, int second) ")
+                + "invalid position " + std::to_string(first));
+    } else if (second < 0 || second >= _size) {
+        throw std::out_of_range(std::string("Language::swap(int first, int second) ")
+                + "invalid position " + std::to_string(second));
+    } else {
+        BigramFreq aux;
+        aux = _vectorBigramFreq[second];
+        _vectorBigramFreq[second] = _vectorBigramFreq[first];
+        _vectorBigramFreq[first] = aux;
+    }
+
+
 }
