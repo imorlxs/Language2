@@ -35,7 +35,7 @@ string Language::getLanguageId() const {
     return _languageId;
 }
 
-void Language::setLanguageId(string &id) {
+void Language::setLanguageId(const string &id) {
     _languageId = id;
 }
 
@@ -61,7 +61,7 @@ int Language::getSize() const {
     return _size;
 }
 
-int Language::findBigram(Bigram &bigram) {
+int Language::findBigram(const Bigram &bigram) {
     for (int i = 0; i < _size; i++) {
         if (_vectorBigramFreq[i].getBigram().getText() == bigram.getText()) {
             return i;
@@ -94,7 +94,7 @@ void Language::sort() {
     }
 }
 
-void Language::save(char fileName[]) {
+void Language::save(const char fileName[]) {
     ofstream fout;
     fout.open(fileName);
     if (fout) {
@@ -110,7 +110,7 @@ void Language::save(char fileName[]) {
     }
 }
 
-void Language::load(char fileName[]) {
+void Language::load(const char fileName[]) {
     ifstream fin;
     string magic_string;
     int frequency;
@@ -147,7 +147,7 @@ void Language::load(char fileName[]) {
     }
 }
 
-void Language::append(BigramFreq &bigramFreq) {
+void Language::append(const BigramFreq &bigramFreq) {
     Bigram bigram = bigramFreq.getBigram();
     int index = this->findBigram(bigram);
     int freq = bigramFreq.getFrequency();
@@ -164,7 +164,7 @@ void Language::append(BigramFreq &bigramFreq) {
     }
 }
 
-void Language::join(Language &language) {
+void Language::join(const Language &language) {
     for (int i = 0; i < language.getSize(); i++) {
         this->append(language.at(i));
     }

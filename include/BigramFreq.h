@@ -51,7 +51,7 @@ public:
      * Modifier method
      * @param bigram The new Bigram value for this object. Input parameter
      */
-    void setBigram(Bigram &bigram);
+    void setBigram(const Bigram &bigram);
 
     /**
      * @brief Sets the frequency of this BigramFreq object. Modifier method.

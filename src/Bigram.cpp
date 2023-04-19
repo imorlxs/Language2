@@ -30,7 +30,7 @@ Bigram::Bigram(char first, char second) {
 
 }
 
-Bigram::Bigram(char text[]) {
+Bigram::Bigram(const char text[]) {
     if (strlen(text) == 2) {
         strcpy(_text, text);
     } else {
@@ -73,7 +73,7 @@ char& Bigram::at(int index) {
 void Bigram::toUpper() {
     int asciidiff = 'a' - 'A';
    // int isodiff = 'à' - 'À';   <----- PARA PASAR A MAYÚSCULAS LOS CARÁCTERES ISO, DESCOMENTAR PARA IMPLEMENTAR
-    for (int i = 0; i <= 1; i++) {
+    for (int i = 0; i < 2; i++) {
         if (_text[i] >= 'a' && _text[i] <= 'z') {
             _text[i] = _text[i] - asciidiff;
         }

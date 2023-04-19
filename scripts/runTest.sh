@@ -1,3 +1,4 @@
+
 #!  /bin/bash
 # Author: Luis Castillo Vidal L.Castillo@decsai.ugr.es
 # Pass test file $1
@@ -41,7 +42,7 @@ function doTest  {
         # Auto-compose a shell for the purpose of trying the binary
         # uses the .timeout file as a lock to detect that the program has ended
         echo "touch $TESTS_FOLDER/.timeout">$TESTS_FOLDER/.run.sh
-        echo "CMD=\"$VALGRIND $FULL_BINARY $MYCALL 1> $TESTS_FOLDER/.out$k 2>&1\"">> $TESTS_FOLDER/.run.sh
+        echo "CMD=\"$FULL_BINARY $MYCALL 1> $TESTS_FOLDER/.out$k 2>&1\"">> $TESTS_FOLDER/.run.sh
         echo "eval \$CMD">>$TESTS_FOLDER/.run.sh
         echo "rm $TESTS_FOLDER/.timeout">>$TESTS_FOLDER/.run.sh
         chmod u+x $TESTS_FOLDER/.run.sh
@@ -64,7 +65,15 @@ function doTest  {
             VALGRIND_LEAKS=FALSE
         fi
         # Tentative writing of the due output to check ISO/UTF format
-        
+        echo "$DUE_OUTPUT" > $TESTS_FOLDER/.due$k
+        if   file $TESTS_FOLDER/.due$k | grep -a --quiet ISO;
+        then
+            toUTF8 $TESTS_FOLDER/.due$k
+            cp $TESTS_FOLDER/.due$k.utf8 $TESTS_FOLDER/.due$k
+            toUTF8 $TESTS_FOLDER/.out$k
+            cp $TESTS_FOLDER/.out$k.utf8 $TESTS_FOLDER/.out$k
+            DUE_OUTPUT=$(cat $TESTS_FOLDER/.due$k)
+        fi 
         # If the real output of the program cotains %%%OUTPUT marks, then only those marks
         # are compared for validity. Otherwise, the full output is compared
         if  grep -a --quiet $OUTPUT_MARK $TESTS_FOLDER/.out$k; 
@@ -82,6 +91,12 @@ function doTest  {
         # Save due and real outputs in disk for further use
         # echo "$DUE_OUTPUT" > $TESTS_FOLDER/.due$k
         echo "$REAL_OUTPUT" > $TESTS_FOLDER/.real$k
+        if   file $TESTS_FOLDER/.real$k | grep -a --quiet ISO;
+        then
+            toUTF8 $TESTS_FOLDER/.real$k
+            cp $TESTS_FOLDER/.real$k.utf8 $TESTS_FOLDER/.real$k
+            REAL_OUTPUT=$(cat $TESTS_FOLDER/.real$k)
+        fi 
         # When both outputs (expected and real) differ or valgrind detects leaks of memory
         # the test FAILS
         if [ -f $TESTS_FOLDER/.timeout ]
@@ -110,10 +125,12 @@ function doTest  {
 if [ -d ../Scripts ]
 then
     source ../Scripts/doConfig.sh
+       source ../Scripts/ansiterminal.sh
 else
    if [ -d ../../Scripts ]
    then
        source ../../Scripts/doConfig.sh
+       source ../../Scripts/ansiterminal.sh
    else
     printf "\n${RED}Unable to find Scripts library${WHITE}\n\n"
     exit
@@ -254,8 +271,9 @@ then
 fi
 # Remove auxiliary files
 rm -f $TESTS_FOLDER/.out* $TESTS_FOLDER/.due* $TESTS_FOLDER/.real* $TESTS_FOLDER/.fail* $TESTS_FOLDER/.call*
-printf "${WHITE}"
+EndOfScript "End of tests"
 if [ "$FAILED_TESTS" == "YES" ]
 then
     exit 1
 fi
+
