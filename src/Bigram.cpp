@@ -50,22 +50,20 @@ std::string Bigram::toString() const {
 }
 
 const char& Bigram::at(int index) const {
-    std::string text(_text);
     if (index < 0 || index > 2) {
         throw std::out_of_range(std::string("const char& Bigram::at(int index) const: ")
                 + "invalid position " + std::to_string(index));
     } else {
-        return text[index];
+        return _text[index];
     }
 }
 
 char& Bigram::at(int index) {
-    std::string text(_text);
     if (index < 0 || index > 1) {
         throw std::out_of_range(std::string("char& Bigram::at(int index): ")
                 + "invalid position " + std::to_string(index));
     } else {
-        return text[index];
+        return _text[index];
     }
 
 }
